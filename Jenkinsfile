@@ -7,6 +7,7 @@ pipeline {
 				sh '''
 					docker build -t ghadaj/capstone .
 				'''
+				}
 			}
 		}
 		stage('push docker image') {
