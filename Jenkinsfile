@@ -2,12 +2,14 @@ pipeline {
 	agent any
 	environment {
 		registry = "ghadaj/capstone"
-	    	registryCredential = ‘docker’
+	    	registryCredential = 'docker'
 	}
 	stages {
 		stage('build docker image') {
 		    steps {
-			 docker.build registry + ":$BUILD_NUMBER" .	
+			    script {
+				 docker.build registry + ":$BUILD_NUMBER" .
+				}
 			}
 		}
 		stage('push docker image') {
