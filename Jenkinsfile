@@ -1,12 +1,6 @@
 pipeline {
 	agent any
 	stages {
-		stage('Lint') {
-		    steps {
-			 sh 'tidy -q -e *.html'
-			}
-		}
-		
 		stage('build docker image') {
 		    steps {
   			withDockerRegistry([credentialsId: 'docker', url: "https://hub.docker.com/repository/docker/ghadaj/capstone/"]) {
