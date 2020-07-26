@@ -1,11 +1,20 @@
 pipeline {
+environment {
+
+        customImage = ''
+    }
 	agent any
 	stages {
+		 stage('Lint HTML') {
+			    steps {
+				    sh 'tidy -q -e *.html'
+			    }
+		    }
 		stage('Build docker image') {
 		    steps {
 			    script{	
 				    docker.withRegistry('https://registry.hub.docker.com','docker') {
-					def customImage = docker.build("ghadaj/mydockerwebapp")
+					customImage = docker.build("ghadaj/mydockerwebapp")
 				      //customImage.push()
 			    }
 			}
