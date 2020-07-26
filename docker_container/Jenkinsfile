@@ -3,10 +3,10 @@ pipeline {
 	stages {
 		stage('build and push docker image') {
 		    steps {
-    				docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+			    script{	docker.withRegistry('https://registry.hub.docker.com','docker') {
 					def customImage = docker.build("ghadaj/mydockerwebapp")
 					customImage.push()
- 				 
+			    }
 				}
 		    }
 	}
