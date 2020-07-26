@@ -1,6 +1,4 @@
 ---
-    - hosts: 127.0.0.1
-      connection: local
       vars:
         download_dir: "{{ lookup('env', 'HOME') }}"
         kubernetes_version: "1.14"
