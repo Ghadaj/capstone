@@ -7,8 +7,8 @@ pipeline {
 					def customImage = docker.build("ghadaj/mydockerwebapp")
 					customImage.push()
  				 
-			}
-		}
-	 
+				}
+		    }
 	}
+}
 }
