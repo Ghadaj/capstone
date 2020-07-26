@@ -6,10 +6,6 @@
         kubernetes_version: "1.14"
       become: yes
       tasks:
-        # Ensure aws cli is installed and configured on local before running these plays
-        - name: Get list of installed binaries
-          command: ls /usr/local/bin
-          register: local_binaries
         - name: Install eksctl
           block:
             - name: Download eksctl
@@ -54,7 +50,6 @@
                 path: /usr/local/bin/kubectl
                 mode: +x
           when: "local_binaries.stdout.find('kubectl') == -1"
-        # ensure that only one cluster exists at a time
         - name: Get existing cluster
           command: eksctl get clusters
           register: existing_clusters
@@ -65,9 +60,9 @@
             - name: Setup clusters on 2 nodes
               command: >
                 eksctl create cluster
-                --name capstone-project
+                --name ceks-cluster
                 --version {{ kubernetes_version }}
-                --region ap-southeast-2
+                --region us-west-2
                 --nodegroup-name worker-node
                 --node-type t3.small
                 --nodes 2
@@ -76,5 +71,5 @@
                 --node-ami auto
               become: no
             - name: Update kubeconfig
-              command: aws eks --region ap-southeast-2 update-kubeconfig --name capstone-project
+              command: aws eks --region us-west-2 update-kubeconfig --name capstone-project
           when: "existing_clusters.stdout.find('No clusters found') != -1"
