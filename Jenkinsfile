@@ -29,10 +29,10 @@ environment {
 		    }
 		}
 		
-		stage('Configure and Build Kubernetes Cluster'){
+		stage('Build Kubernetes Cluster'){
 			steps {
 		
-			    sh 'ansible-playbook create-cluster.yml'
+			    sh 'ansible-playbook cluster.yml'
 			    
 			}
 		    }
