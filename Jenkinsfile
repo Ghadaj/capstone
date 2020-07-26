@@ -28,12 +28,20 @@ environment {
 			}
 		    }
 		}
+		
+		stage('Configure and Build Kubernetes Cluster'){
+			steps {
+		
+			    sh 'ansible-playbook create-cluster.yml'
+			    
+			}
+		    }
 		stage('Deploy kubect') {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws') {
 					sh '''
-						 kubectl apply -f  deployment.yml -v=8
-					#sh 'sudo kubectl apply -f ./deployments/load-balancer.yml'
+						sudo kubectl apply -f  deployment.yml 
+					 	sudo kubectl apply -f load-balancer.yml
 					'''
 				}
 			}
