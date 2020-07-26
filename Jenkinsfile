@@ -32,7 +32,7 @@ environment {
 		stage('Build Kubernetes Cluster'){
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws') {
-			    		sh 'kubectl config use-context arn:aws:eks:us-west-2:433927923947:cluster/ekscluster'
+			    		sh 'kubectl config use-context arn:aws:eks:us-west-2:433927923947:cluster/my-cluster'
 				}
 			}
 		    }
