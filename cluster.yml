@@ -60,7 +60,7 @@
             - name: Setup clusters on 2 nodes
               command: >
                 eksctl create cluster
-                --name ceks-cluster
+                --name mydockerwebapp
                 --version {{ kubernetes_version }}
                 --region us-west-2
                 --nodegroup-name worker-node
@@ -71,5 +71,5 @@
                 --node-ami auto
               become: no
             - name: Update kubeconfig
-              command: aws eks --region us-west-2 update-kubeconfig --name capstone-project
+              command: aws eks --region us-west-2 update-kubeconfig --name mydockerwebapp
           when: "existing_clusters.stdout.find('No clusters found') != -1"
