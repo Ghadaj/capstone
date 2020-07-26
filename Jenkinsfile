@@ -3,7 +3,7 @@ pipeline {
 	stages {
 		stage('build docker image') {
 		    steps {
-				withCredentials([string(credentialsId: 'docker', variable: 'TOKEN')]) {
+			withCredentials([string(credentialsId: 'docker', variable: 'TOKEN')]) {
 				sh '''
 					docker build -t ghadaj/capstone .
 				'''
@@ -13,12 +13,12 @@ pipeline {
 		stage('push docker image') {
 		    steps {
 			 sh '''
-					docker login -u ghadaj -p Ghada153
-					docker push ghadaj/capstone
+				docker login -u ghadaj -p Ghada153
+				docker push ghadaj/capstone
 			 '''
 			}
 		}		
-	    stage('Lint HTML') {
+	    stage('Lint') {
 		    steps {
 			 sh 'tidy -q -e *.html'
 			}
