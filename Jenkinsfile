@@ -1,25 +1,18 @@
 pipeline {
 	agent any
 	stages {
-		stage('build docker image') {
+		stage('build and push docker image') {
 		    steps {
   			withDockerRegistry([credentialsId: 'docker', url: "https://hub.docker.com/repository/docker/ghadaj/capstone/"]) {
     					sh '''
-  					    docker build -t dockerimg .
-  					    docker push dockerimg
+  					   FROM nginx:mainline-alpine
+					   RUN rm /etc/nginx/conf.d/*
+					   ADD hello.conf /etc/nginx/conf.d/
+					   ADD index.html /usr/share/nginx/html/
  				   '''
  				 }
 			}
 		}
-		stage('push docker image') {
-		    steps {
-			 sh '''
-				docker login -u ghadaj -p Ghada153
-				docker push ghadaj/capstone
-			 '''
-			}
-		}
-
 	 
 	}
 }
