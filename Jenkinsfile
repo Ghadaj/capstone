@@ -3,11 +3,11 @@ pipeline {
 	stages {
 		stage('build docker image') {
 		    steps {
-			withCredentials([string(credentialsId: 'docker', variable: 'TOKEN')]) {
 				sh '''
+	
 					docker build -t ghadaj/capstone .
 				'''
-				}
+				
 			}
 		}
 		stage('push docker image') {
