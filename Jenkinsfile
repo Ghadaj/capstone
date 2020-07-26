@@ -3,13 +3,11 @@ pipeline {
 	environment {
 		registry = "ghadaj/capstone"
 	    	registryCredential = ‘docker’
-}
+	}
 	stages {
 		stage('build docker image') {
 		    steps {
-
-			 docker.build registry + ":$BUILD_NUMBER" .
-				
+			 docker.build registry + ":$BUILD_NUMBER" .	
 			}
 		}
 		stage('push docker image') {
@@ -25,5 +23,5 @@ pipeline {
 			 sh 'tidy -q -e *.html'
 			}
 		}
-}
+	}
 }
