@@ -4,12 +4,22 @@ pipeline {
 		registry = "ghadaj/capstone"
 	    	registryCredential = 'docker'
 	}
+	
 	stages {
+		stage('Lint') {
+		    steps {
+			 sh 'tidy -q -e *.html'
+			}
+		}
+		
 		stage('build docker image') {
 		    steps {
-			    script {
-				sudo docker.build registry + ":$BUILD_NUMBER"
-				}
+  			withDockerRegistry([credentialsId: 'docker', url: "https://hub.docker.com/repository/docker/ghadaj/capstone/"]) {
+    					sh '''
+  					    docker build -t dockerimg .
+  					    docker push dockerimg
+ 				   '''
+ 				 }
 			}
 		}
 		stage('push docker image') {
@@ -19,11 +29,15 @@ pipeline {
 				docker push ghadaj/capstone
 			 '''
 			}
-		}		
-	    stage('Lint') {
-		    steps {
-			 sh 'tidy -q -e *.html'
-			}
 		}
+		
+		
+		stage('Set kubectl context') {
+			
+    		}
+		stage('Deploy container') {
+			
+    		}
+	 
 	}
 }
