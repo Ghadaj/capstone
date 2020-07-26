@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: capstone-project
+  name: eks-cluster
   labels:
-    app: capstone-project
+    app: eks-cluster
 spec:
   type: LoadBalancer
   selector:
-    app: capstone-project
+    app: eks-cluster
   ports:
     - port: 80
       targetPort: 80
