@@ -4,7 +4,7 @@ pipeline {
 		stage('build and push docker image') {
 		    steps {
     					sh '''
-					  sudo docker login -u ghadaj -p Ghada153
+					  # sudo docker login -u ghadaj -p Ghada153
   					  # FROM nginx:mainline-alpine
 					  # RUN rm /etc/nginx/conf.d/*
 					  # ADD hello.conf /etc/nginx/conf.d/
