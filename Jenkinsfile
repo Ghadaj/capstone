@@ -1,22 +1,15 @@
 pipeline {
 	agent any
 	stages {
-		stage('build and push docker image') {
+		stage('Set current kubectl context') {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws') {
-				sh '''
-				eksctl create cluster \
-				--name mycluster \
-				--version 1.17 \
-				--region us-west-2 \
-				--nodegroup-name linux-nodes \
-				--node-type t3.medium \
-				--nodes 3 \
-				--nodes-min 1 \
-				--nodes-max 4 \
-				'''
+					sh '''
+						kubectl config use-context arn:aws:eks:us-west-2:433927923947:cluster/ekscluster
+					'''
 				}
-		    }
+			}
+		}
 	}
 }
 }
