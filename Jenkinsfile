@@ -1,10 +1,5 @@
 pipeline {
 	agent any
-	environment {
-		registry = "ghadaj/capstone"
-	    	registryCredential = 'docker'
-	}
-	
 	stages {
 		stage('Lint') {
 		    steps {
