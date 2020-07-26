@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name:my-pod
+  labels:
+    app: mydockerwebapp 
+spec:
+  strategy:
+    type: RollingUpdate
+    replicas: 2
+    selector:
+      matchLabels:
+        app: mydockerwebapp
+      template:
+        metadata:
+          labels:
+            app: mydockerwebapp
+        spec:
+          containers:
+            - name: mydockerwebapp
+              image: ghadaj/mydockerwebapp
+              ports:
+               - containerPort: 80
