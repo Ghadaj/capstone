@@ -25,16 +25,7 @@ pipeline {
 			 '''
 			}
 		}
-		
-		
-		stage('Set kubectl context') {
-			    steps {
-			}
-    		}
-		stage('Deploy container') {
-			    steps {
-			}
-    		}
+
 	 
 	}
 }
