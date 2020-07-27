@@ -29,13 +29,13 @@ environment {
 		    }
 		}
 		
-		stage('Build Kubernetes Cluster'){
+	/*	stage('Build Kubernetes Cluster'){
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws') {
 			    		sh 'kubectl config use-context arn:aws:iam::433927923947:role/eksctl-windows-prod-cluster-ServiceRole-XJK4LJAC55FA'
 				}
 			}
-		    }
+		    } */
 		stage('Deploy kubect') {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws') {
