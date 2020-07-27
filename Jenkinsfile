@@ -39,9 +39,14 @@ environment {
 		stage('Deploy kubect') {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws') {
+					//kubectl apply -f  deployment.yml 
+					  //       kubectl apply -f load-balancer.yml
 					sh '''
-						 kubectl apply -f  deployment.yml 
-					 	 kubectl apply -f load-balancer.yml
+						 
+						kubectl run my-pod --image=ghadaj/mydockerwebapp:latest --port=80 
+						kubectl get pod --all-namespaces --no-headers
+						kubectl port-forward my-pod  8000:80
+
 					'''
 				}
 			}
