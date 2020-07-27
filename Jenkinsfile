@@ -40,8 +40,8 @@ environment {
 			steps {
 				withAWS(region:'us-west-2', credentials:'aws') {
 					sh '''
-						sudo kubectl apply -f  deployment.yml 
-					 	sudo kubectl apply -f load-balancer.yml
+						 kubectl apply -f  deployment.yml 
+					 	 kubectl apply -f load-balancer.yml
 					'''
 				}
 			}
